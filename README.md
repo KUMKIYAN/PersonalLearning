@@ -18,31 +18,31 @@ goto the file folder and run "docker-compose up -d"
 
 version: "3.1"
 services:
-	selenium-hub:
-  	image: selenium/hub
-  	ports:
-  		- "4444:4444"
-  	environment:
-		GRID_MAX_SESSION: 10
-	#selenium-chrome
-	selenium-chrome:
-  	image: selenium/node-chrome
+    selenium-hub:
+    image: selenium/hub
+    ports:
+        - "4444:4444"
+    environment:
+        GRID_MAX_SESSION: 10
+    #selenium-chrome
+    selenium-chrome:
+    image: selenium/node-chrome
     depends_on:
-		- hub
-  	environment:
-		HUB_HOST: hub
-		NODE_MAX_INSTANCES: 3
-		NODE_MAX_SESSION: 3
-	#selenium-firefox
-	selenium-firefox:
-  	image: selenium/node-firefox
-  	depends_on:
-		- hub
-	environment:
-		HUB_HOST: hub
-		NODE_MAX_INSTANCES: 3
-		NODE_MAX_SESSION: 3
-
+        - hub
+     environment:
+        HUB_HOST: hub
+        NODE_MAX_INSTANCES: 3
+        NODE_MAX_SESSION: 3
+     #selenium-firefox
+     selenium-firefox:
+     image: selenium/node-firefox
+     depends_on:
+        - hub
+     environment:
+        HUB_HOST: hub
+        NODE_MAX_INSTANCES: 3
+        NODE_MAX_SESSION: 3
+        
 To down docker compose use below commands
 docker-compose down
 docker-compose stop
