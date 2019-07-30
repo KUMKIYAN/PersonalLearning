@@ -11,7 +11,6 @@ public class MapEntry {
         user.put(103,"Rajesh");
 
         //Java 8
-
         Set<Map.Entry<Integer,String>> users = user.entrySet();
         users.stream().forEach( e -> System.out.println(e.getKey() + "---->" + e.getValue()));
 
