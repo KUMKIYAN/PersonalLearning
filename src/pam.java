@@ -166,17 +166,17 @@ class MapExample{
         System.out.println(myMap.values().stream().sorted(comp1).collect(Collectors.toList()));
         System.out.println(myMap.values().stream().sorted(comp1.reversed()).collect(Collectors.toList()));
 
-        Map<String, Integer> myMap1 = new TreeMap<String,Integer>();
 
-        Map<Integer,String> kk = new LinkedHashMap<Integer, String>();
+        Map<Integer,String> descendingOrderMap = new LinkedHashMap<Integer, String>();
 
         myMap.entrySet().stream()
                 .sorted((k1, k2) -> -k1.getValue().compareTo(k2.getValue()))
-                .forEach(k -> kk.put(k.getKey(),k.getValue()));
+                .forEach(k -> descendingOrderMap.put(k.getKey(),k.getValue()));
 
-        myMap.entrySet().stream().sorted((k1,k2) -> -k1.getValue().compareTo(k2.getValue())).forEach(s -> System.out.println(s.getKey() + ":" + s.getValue()));
+        myMap.entrySet().stream().sorted((k1,k2) -> -k1.getValue().compareTo(k2.getValue()))
+                .forEach(s -> System.out.println(s.getKey() + ":" + s.getValue()));
 
-        System.out.println(kk);
+        System.out.println(descendingOrderMap);
 
 
         String myProxy = "localhost:7777";  //example: proxy host=localhost port=7777
