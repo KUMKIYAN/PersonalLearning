@@ -1,3 +1,8 @@
+import org.openqa.selenium.Proxy;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,7 +12,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static net.sourceforge.htmlunit.corejs.javascript.TopLevel.Builtins.Function;
 
 public class pam {
 
@@ -123,6 +127,69 @@ class Student1{
 }
 
 
+class MapExample{
+
+    public static void main(String args[]){
+    Map<Integer, String> myMap = new HashMap<Integer, String>();
+
+    myMap.put(1,"Kumar");
+    myMap.put(5,"Sasi");
+    myMap.put(6,"Arjun");
+    myMap.put(7,"Lakshmi");
+    myMap.put(8,"Lakshmi");
+    myMap.put(13,"Manoj");
+    myMap.put(9,"Chaithu");
+    myMap.put(10,"Vanaja");
+    myMap.put(11,"Arjun");
+    myMap.put(12,"Rushi");
+    myMap.put(2,"Sudha");
+    myMap.put(3,"Ravi");
+    myMap.put(4,"Rajesh");
+    myMap.put(14,"Kumar");
+    myMap.put(15,"Sasi");
+    myMap.put(16,"Arjun");
+    myMap.put(17,"Lakshmi");
+    myMap.put(18,"Lakshmi");
+    myMap.put(139,"Manoj");
+    myMap.put(9,"Chaithu");
+    myMap.put(10,"Vanaja");
+    myMap.put(11,"Arjun");
+    myMap.put(12,"Rushi");
+    myMap.put(2,"Sudha");
+    myMap.put(3,"Ravi");
+    myMap.put(4,"Rajesh");
+
+        System.out.println(myMap);
+
+        Comparator<String> comp1 = String::compareTo;
+
+        System.out.println(myMap.values().stream().sorted(comp1).collect(Collectors.toList()));
+        System.out.println(myMap.values().stream().sorted(comp1.reversed()).collect(Collectors.toList()));
+
+        Map<String, Integer> myMap1 = new TreeMap<String,Integer>();
+
+        Map<Integer,String> kk = new LinkedHashMap<Integer, String>();
+
+        myMap.entrySet().stream()
+                .sorted((k1, k2) -> -k1.getValue().compareTo(k2.getValue()))
+                .forEach(k -> kk.put(k.getKey(),k.getValue()));
+
+        myMap.entrySet().stream().sorted((k1,k2) -> -k1.getValue().compareTo(k2.getValue())).forEach(s -> System.out.println(s.getKey() + ":" + s.getValue()));
+
+        System.out.println(kk);
+
+
+        String myProxy = "localhost:7777";  //example: proxy host=localhost port=7777
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(CapabilityType.PROXY, new Proxy().setHttpProxy(myProxy));
+      //  WebDriver webDriver = new FirefoxDriver(capabilities);
+    }
+
+        }
+
+
+
+
 
 
 
@@ -134,11 +201,13 @@ class Student1{
 
 //based on first name - done
 
-//avg indian city temparature
+//avg indian city temparature - done
 
 //what is the advantage of BDD
 
 // When you will not go for BDD
 
 // maven should be learnt completely
+
+// jenkins
 
