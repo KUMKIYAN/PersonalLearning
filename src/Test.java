@@ -1,3 +1,8 @@
+import java.io.*;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.URL;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -19,18 +24,6 @@ import java.util.TreeMap;
 import java.util.SortedMap;
 import java.util.Properties;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.Serializable;
-import java.io.ObjectOutputStream;
-import java.io.ObjectInputStream;
 
 class  Test
 {
@@ -6909,5 +6902,59 @@ class TestRanPrivate extends PrivateOne
 				1 error
 		*/
         System.out.println(p.b);
+    }
+}
+
+class IdentifyIP {
+
+    public static void main(String args[]) throws Exception {
+        String myUrl = "www.gmail.com";
+        InetAddress in = InetAddress.getByName(myUrl);
+        System.out.println("ip address :" + in);
+
+        URL url = new URL("http://www.gmail.com:1010/index.html");
+        System.out.println(url.getProtocol());
+        System.out.println(url.getPort());
+        System.out.println(url.getPath());
+    }
+}
+
+class client{
+    public static void main(String args[]) throws IOException {
+        //to write data to server
+        Socket s = new Socket("localhost" , 5555);
+        String myString = "Hi Kiyan";
+        OutputStream os = s.getOutputStream();
+        PrintStream ps = new PrintStream(os);
+        ps.println(myString);
+
+        //to read data from server
+        InputStream is = s.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        String str = br.readLine();
+        System.out.println(str);
+    }
+}
+
+class Server {
+    public static void main(String args[]) throws IOException, InterruptedException {
+        // to read the data from client
+        ServerSocket ss = new ServerSocket(5555);
+        Socket s = ss.accept();
+        System.out.println("connection is created ");
+        Thread.sleep(2000l);
+
+        // read the data from client
+        InputStream is = s.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        String data = br.readLine();
+        System.out.println(data + " from client");
+        Thread.sleep(2000l);
+
+        //write the data to the client
+        data = data + " this is from server";
+        OutputStream os = s.getOutputStream();
+        PrintStream ps = new PrintStream(os);
+        ps.println(data + " hi");
     }
 }
