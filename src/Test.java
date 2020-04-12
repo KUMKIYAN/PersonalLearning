@@ -1,29 +1,24 @@
 import java.io.*;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
-import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.TreeSet;
-import java.util.SortedSet;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.Collection;
-import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.TreeMap;
-import java.util.SortedMap;
-import java.util.Properties;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.util.*;
 import java.io.FileInputStream;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+    import java.util.Base64;
+
+import static java.time.temporal.ChronoUnit.SECONDS;
 
 class  Test
 {
@@ -6956,5 +6951,177 @@ class Server {
         OutputStream os = s.getOutputStream();
         PrintStream ps = new PrintStream(os);
         ps.println(data + " hi");
+    }
+}
+
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@interface MyAnnotation{
+    int value();
+}
+
+class ApplyAnnotation{
+    @MyAnnotation(value = 50)
+    public void m1(){
+        System.out.println("m1 method");
+    }
+}
+
+class AccessAnnotation{
+    public static void main(String args[]) throws NoSuchMethodException {
+         ApplyAnnotation aa = new ApplyAnnotation();
+         Method m = aa.getClass().getMethod("m1");
+         MyAnnotation mm = m.getAnnotation(MyAnnotation.class);
+        System.out.println("value is :" + mm.value());
+    }
+}
+
+
+class Kiyan {
+    void ts() {
+        System.out.println("Jai telngana");
+    }
+    void ap() {
+        System.out.println("jai Andra");
+    }
+    void others() {
+        System.out.println("jai Others");
+    }
+}
+
+class Sasi
+{
+    public static void main(String[] args) {
+        Kiyan k = new Kiyan();
+        k.ts();
+        k.ap();
+        k.others();
+    }
+
+
+}
+
+class Names{
+    String names;
+
+    public Names(String names) {
+        this.names = names;
+    }
+
+    public static void main(String args[]){
+        Names[] n = new Names[3];
+        n[2] = new Names("kumar");
+        for(Names nn : n){
+            System.out.println(nn);
+        }
+
+        int[] a = new int[4];
+        a[1] = 2;
+        for (int k:a)
+            System.out.println(k);
+
+    }
+}
+
+class TimeDiff{
+
+    public static void main(String[] args) throws InterruptedException {
+        LocalTime time = LocalTime.now();
+       Thread.sleep(8000l);
+        LocalTime time1 = LocalTime.now();
+        System.out.println(SECONDS.between(time, time1));
+    }
+
+
+
+
+}
+
+class NumberType{
+
+    public static boolean isEvenNumber(int a){
+        return a%2 == 0;
+    }
+
+    public static void main(String args[]){
+        Predicate<Integer> pi =  NumberType::isEvenNumber;
+
+        System.out.println(pi.test(10));
+        System.out.println(pi.negate().test(20));
+
+        List<Integer> kk = Arrays.asList(10,20,31);
+        kk.stream().filter(pi.negate()).forEach(System.out::println);
+
+
+    }
+
+
+}
+
+class SocksExamples{
+
+
+    static BiFunction<Integer[], Integer, Integer> f = (a, b) -> {
+        int counter = 0;
+        for(int k = 0; k < a.length; k++){
+            if (a[k].equals(b))
+                counter++;
+        }
+
+       return counter/2;
+    };
+
+    public static void main(String[] args) {
+        Integer[] socks = {10,9,9,5,4,4,6,7,7,7,7};
+
+       // System.out.println(Stream.of(socks).distinct().collect(Collectors.toMap(a -> a, a -> f.apply(socks, a))).values().stream().mapToInt(Integer::intValue).sum());
+
+
+        for(int i : socks) {
+
+        }
+        System.out.println(Stream.of(socks).distinct().map(a -> Collections.frequency(Stream.of(socks).collect(Collectors.toList()), a)/2).mapToInt(Integer::intValue).sum());
+
+    }
+}
+
+class Autmation{
+
+    public static void main(String[] args) {
+        TreeMap<String, String> responses = new TreeMap<String, String>(new Comparator<String>() {
+                    @Override
+                    public int compare(String e1, String e2) {
+                        return -1;
+                    }
+                });
+
+        responses.put("01","02");
+        responses.put("01","02");
+        responses.put("01","03");
+        System.out.println(responses);
+    }
+
+}
+
+
+class jmeter{
+    public static void main(String[] args) {
+        ArrayList<String> l = new ArrayList<String>();
+        l.add("1");
+        l.add("2");
+        l.stream().forEach(System.out::println);
+    }
+}
+
+
+class Base64BasicEncryptionExample {
+    public static void main(String[] args) {
+
+
+        String token = "kiyandoor";
+        System.out.println(Base64.getMimeEncoder().encodeToString(token.getBytes()));
+        System.out.println(new String(Base64.getMimeDecoder().decode("a2l5YW5kb29y")));
+
     }
 }
