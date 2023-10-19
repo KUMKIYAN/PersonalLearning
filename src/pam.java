@@ -1,8 +1,3 @@
-import org.openqa.selenium.Proxy;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -177,12 +172,6 @@ class MapExample{
                 .forEach(s -> System.out.println(s.getKey() + ":" + s.getValue()));
 
         System.out.println(descendingOrderMap);
-
-
-        String myProxy = "localhost:7777";  //example: proxy host=localhost port=7777
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.PROXY, new Proxy().setHttpProxy(myProxy));
-      //  WebDriver webDriver = new FirefoxDriver(capabilities);
     }
 
         }
